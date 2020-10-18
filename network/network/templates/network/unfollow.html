@@ -1,0 +1,10 @@
+{% extends "network/layout.html" %}
+{% block body %}
+
+<div>Unfollow</div>
+
+{% for follow in following %}
+    {{follow.following_user_id}}
+{% endfor %}
+
+{% endblock %}

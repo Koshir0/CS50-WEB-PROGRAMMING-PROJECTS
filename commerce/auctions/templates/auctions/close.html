@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+<div>
+  {% if so  %}
+  <div>{{so}}</div>
+  {% else %}
+  <div><p>{{close }}</p>
+    <p>The winner is {{winner}}</p></div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

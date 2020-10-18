@@ -1,0 +1,50 @@
+{% extends "network/layout.html" %}
+{% block body %}
+<!-- <h1>followers</h1>
+{% for follow in followers %}
+{{follow}}
+{% endfor %}
+ -->
+ <style>
+ 	#following-head{
+ 		background-color: black;
+ 		width: 300px;
+ 		border:2px solid white;
+ 		padding: 10px;
+ 		color:white;
+ 		text-align: center;
+ 		margin: 0 auto;
+ 		border-radius: 3px;
+ 	}
+ 	.following-div{
+ 		/*border:1px solid black;*/
+ 		padding: 30px;
+ 	}
+ 	.post-head
+ 	{
+ 		width: 300px;
+ 		/*border:2px solid black;*/
+ 	}
+ 	.following-innerdiv p{
+ 		background-color: black;
+ 		margin: 10px 0;
+ 		padding: 30px;
+ 		color: white;
+ 	}
+ </style>
+
+<h1 id="following-head">following</h1>
+
+
+{% for x in followingPosts%}
+	<div class="following-div">
+		<h2 class="post-head">{{x.author}} POSTs </h2>
+		<div class="following-innerdiv">
+			{% for post in x.posts %} 
+			<p><strong>Post: </strong>{{post.post}}<strong> {{post.created_date}} </strong></p>
+			 {% endfor %}
+		</div>
+	</div>
+{% endfor %}
+
+{% endblock %}

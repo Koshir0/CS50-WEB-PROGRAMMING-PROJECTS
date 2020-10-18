@@ -1,0 +1,14 @@
+
+
+<h1>Update Post</h1>
+<!-- {{post }} -->
+{% for p in post %}
+    <div class="new_post">
+	    	<h5>{{ p.user}}</h5>
+	    	<form method="post" action="{% url 'edit' post_id %}">
+	    		{% csrf_token %}
+		    	<textarea class="form-control" rows="3" name="update_post">{{ p.post}}</textarea>
+		    	<button class="btn btn-primary">Update Post</button>
+		    </form>
+	    </div>
+{% endfor %}

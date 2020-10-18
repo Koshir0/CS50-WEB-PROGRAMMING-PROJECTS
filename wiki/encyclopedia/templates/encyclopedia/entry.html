@@ -1,0 +1,21 @@
+  {% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+{% if entry %}
+   
+
+<p>{{ entry|safe }}</p>
+
+ <a href="{% url 'update_page' title %}">update</a></li>
+{% else %}
+			<div class="alert alert-warning" role="alert">This entry is not exist</div>
+
+	{% endif %}
+
+    
+
+{% endblock %}

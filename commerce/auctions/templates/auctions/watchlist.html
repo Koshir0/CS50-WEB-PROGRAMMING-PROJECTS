@@ -1,0 +1,31 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlists</h2>
+
+   <div class="container">
+    <div class="row">
+    {% for list in watchlists %}
+    <div class="col-sm">
+    	<div id="item">
+    		   
+
+    		<img src="{{list.image}}">
+	    	<a href="{% url 'listing' list.id %}">
+	    		<div>
+
+		    		<p>{{list.item}}</p>
+			    	<p>{{list.description}}</p>
+			    	<p>{{list.created_date}}</p>
+			    	<p>Price ${{list.price}}</p>
+    	<a href="{% url 'delete' list.id %}" id="badge" class="badge badge-danger">remove list </a>
+			    	
+		    	</div>
+	    	</a>
+	    </div>
+	</div>
+    {% endfor %}
+
+   </div>
+</div>
+{% endblock %}

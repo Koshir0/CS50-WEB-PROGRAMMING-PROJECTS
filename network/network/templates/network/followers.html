@@ -1,0 +1,36 @@
+{% extends "network/layout.html" %}
+{% block body %}
+<style>
+ 	#follower-head{
+ 		background-color: orange;
+ 		width: 300px;
+ 		border:2px solid black;
+ 		padding: 10px;
+ 		text-align: center;
+ 		margin: 0 auto;
+ 		border-radius: 3px;
+ 	}
+ 	.follower-div{
+ 		/*border:1px solid black;*/
+ 		padding: 30px;
+ 	}
+ 	
+ 	.follower-innerdiv p{
+ 		background-color: darkorange;
+ 		margin: 10px 0;
+ 		padding: 30px;
+ 		color: white;
+ 	}
+ </style>
+
+
+<h1 id="follower-head">Followers </h1>
+<div class="follower-div">
+	{% for follower in followers %}
+		
+		<div class="follower-innerdiv"><p>{{follower}}</p></div>
+	{% endfor %}
+</div>
+
+
+{% endblock %}

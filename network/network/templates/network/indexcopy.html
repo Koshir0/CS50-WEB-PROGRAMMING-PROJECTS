@@ -1,0 +1,198 @@
+
+
+{% block body %}
+ <div id="content">
+
+    <div class="container">
+    	<h1>All Post   </h1>
+        {% if user.is_authenticated %}
+	    <div class="new_post">
+            <h5>New Post</h5>
+            <form method="post" action="{% url 'new_post' %}">
+                {% csrf_token %}
+                <textarea class="form-control" rows="3" name="new_post"></textarea>
+                <button class="btn btn-warning">Post</button>
+            </form>
+        </div>
+        {% endif %}
+
+
+        
+	    {% for post in allposts %}
+	     <div class="new_post">
+           
+           
+	    	<h5><a href="{% url 'profile' post.user.id %}"> {{ post.user}} </a></h5>
+
+            {% if post.user.username == user.username %}
+
+            <p id="edit" data-id="{{post.id}}">Edit </p>
+           
+    
+            
+            {% endif %}
+
+	    	<p>{{ post.post}}</p>
+	    	<p><strong>{{ post.created_date}}</strong></p>
+            <p>{{post.likesto.all|length}}   
+                <span >
+                    <img  data-id="{{post.id}}" class="naruto-img" src="https://img.icons8.com/ios/50/000000/naruto.png"/>
+                </span>
+                <span  >
+                    <img   data-id="{{post.id}}" class="unnaruto-img"  src="https://img.icons8.com/dusk/50/000000/naruto.png"/>
+                </span>
+               
+                
+               {% for liker in post.likesto.all%}
+                    {% if liker.user_like.username == user.username%}
+                       
+                    {% endif %}
+               {% endfor %}
+            <p>Comments</p>
+       
+    	    </div>
+	    {% endfor %}
+
+
+
+    </div>
+
+    {% if allposts.has_other_pages %}
+    <nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        {% if allposts.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ allposts.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled page-item"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in allposts.paginator.page_range %}
+          {% if allposts.number == i %}
+            <li class="active page-link"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li  class="page-item"><a  class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if allposts.has_next %}
+          <li  class="page-item"><a  class="page-link" href="?page={{ allposts.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled page-item"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+  </nav>
+    {% endif %}
+
+
+
+
+</div>
+
+{% csrf_token %}
+
+    <script type="text/javascript">
+
+
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        function edit(postid) {
+            fetch(`/edit/${postid}`)
+            .then(response => response.text())
+            .then(text => {
+                console.log(text);
+                document.querySelector('#content').innerHTML = text;
+            });
+
+        }
+          
+            function like(postid, naruto) {
+                
+                // Find section text from server
+                // likes/<int:postid>
+                fetch(`/likes/${postid}`)
+                .then(response => response.text())
+                .then(text => {
+                    // naruto.disabled = true
+                    document.querySelector('#content').innerHTML = text;
+                    // naruto.src = 'https://img.icons8.com/dusk/50/000000/naruto.png'
+                    // naruto.style.display = "none";
+                    // alert("like naruto");
+                    
+                    // Log text and display on page
+                    // alert("naruto like");
+                    
+                    // document.querySelector('.span').innerHTML = likes;
+                });
+            }
+           
+
+            function unlike(postid, naruto) {
+                
+                // Find section text from server
+                // likes/<int:postid>
+                fetch(`/unlike/${postid}`)
+                .then(response => response.text())
+                .then(text => {
+                   document.querySelector('#content').innerHTML = text;
+                    // naruto.src = 'https://img.icons8.com/ios/50/000000/naruto.png';
+                    // naruto.style.display = "none";
+                    // alert("unlike naruto");
+                    
+                });
+            }
+            document.querySelectorAll("#edit").forEach(e =>{
+                e.addEventListener("click", function(){
+                    edit(this.dataset.id);
+                });
+            });
+            document.querySelectorAll(".naruto-img").forEach(naruto =>{
+                naruto.addEventListener("click", function(){
+                    if(this.src == 'https://img.icons8.com/ios/50/000000/naruto.png'){
+                        
+                        like(this.dataset.id, this);
+                    }
+                       
+                    
+                    
+                });
+                    })
+
+
+            document.querySelectorAll(".unnaruto-img").forEach(naruto =>{
+                naruto.addEventListener("click", function(){
+                     if (this.src == 'https://img.icons8.com/dusk/50/000000/naruto.png'){
+                            
+                            unlike(this.dataset.id, this);
+                    }
+                       
+                    
+                    
+                });
+                    })
+           
+            // https://img.icons8.com/dusk/50/000000/naruto.png;
+            // document.querySelectorAll("#edit").addEventListener("click", function(){
+            //     edit(this.dataset.id);
+            // });
+            // document.addEventListener('DOMContentLoaded', function() {
+                // Add button functionality
+                // document.querySelectorAll('.naruto').forEach(naruto => {
+                //     naruto.onclick = function() {
+                //             like(this.dataset.id); 
+                               
+                //     };
+                // });
+                    // document.querySelectorAll('.unnaruto').forEach(unnaruto => {
+                    // unnaruto.onclick = function() {
+                    //         unlike(this.dataset.id);
+                            
+                            
+                    //     }
+                        
+                        
+                    // });
+               
+             
+            // });
+
+    </script>
+{% endblock %}
+
+

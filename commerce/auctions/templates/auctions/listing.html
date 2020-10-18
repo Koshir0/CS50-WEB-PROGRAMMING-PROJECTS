@@ -1,0 +1,75 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Listing: {{ listing.item }}</h2>
+
+
+    <div class="main">
+       
+    
+    <!-- <br> -->
+    <div class="listing">
+        <div class="listing_img">
+              <img src="{{listing.image}}">
+        </div>
+        <div class="details">
+            {% if listing.description %}<p>{{ listing.description }} </p>{% else %}  {% endif %}
+            <p>Listed By:{{listing.listed_by}}</p>
+            <p>Category:{% if listing.category %}{{listing.category}} {% else %} No category listed {% endif %}</p>
+              <h4>Price ${{ listing.price }}</h4>
+              <h4>Bid start from ${{ listing.starting_bid }}</h4>
+
+
+            <p>{% if bids > 0 %} {{bids}} {% else %} 0{% endif %} bid(s) so far. {% if last_bid.bid_user == user.username  %}Your bid is the current bid.{% endif %} </p>
+            <!-- 
+                {% for bid in all_bid %}
+                <p>{{bid.bid_price}}</p>
+                {% endfor %} -->
+            
+            <form action="{% url 'bid' listing.id %}" method="post">
+                 {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="bid" class="form-control" placeholder="Bid">
+                </div>
+                <input class="btn btn-primary" type="submit" value="Place Bid" >
+            </form>
+
+            <!-- <h3>Details</h3> -->
+           <!--  <ul>
+                <li>Listed By:{{listing.listed_by}}</li>
+                <li>Category:{% if listing.category %}{{listing.category}} {% else %} No category listed {% endif %}</li>
+            </ul> -->
+             <div class="buttons">
+                <a href="{% url 'watch' listing.id %}" id="badge" class="badge badge-secondary">Watching list </a>
+            
+                {% if user.username == listing.listed_by %}
+                    <a href="{% url 'close' listing.id %}" id="badge" class="badge badge-warning">Close</a>
+                {% endif %}
+            </div>
+        </div>
+
+        
+         
+    </div>
+    
+    <!-- <a href="{% url 'index' %}">All Listing</a> -->
+    <hr>
+    <h2>Comments</h2>
+
+    <form action="{% url 'comment' listing.id %}" method="post" >
+        {% csrf_token %}
+        <div class="form-group comment-field">
+            <input type="text" name="comment" >
+        
+        <input type="submit" name="submit" value="comment" >
+        </div>
+    </form>
+    
+   
+        {% for comment in comments %}
+        <div class="comment">{{comment.comment_user}} Said: {{comment.comment}}</div>
+        {% endfor %}
+   
+    </div>
+    
+{% endblock %}

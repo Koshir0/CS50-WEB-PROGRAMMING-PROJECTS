@@ -1,0 +1,158 @@
+{% extends "network/layout.html" %}
+{% block body %}
+<style>
+
+	.head{
+		display: flex;
+		justify-content: space-around;
+		margin: 10px;	
+	}
+	main{
+		border:solid black 3px;
+		width: 100%;
+		height: auto;
+		margin: auto;
+		box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.75);
+
+	}
+	.profile{
+		width: 150px;
+		height: 150px;
+		border-radius: 50%;
+		border: solid 5px orange;
+	}
+	button{
+		border: none;
+		background-color: orange;
+		color:black;
+		font-size: 2rem;
+		/*width: 100px;*/
+	}
+	.head p{
+		font-size:20px;
+	}
+
+	.follow p{
+		
+		width: 150px;
+		height: 50px;
+		text-align: center;
+		padding: 5px;
+		background-color: black;
+		display: inline-block;
+
+		margin-left: 30px;
+		
+
+	}
+	.following{
+			border:none !important;
+		}
+	#username{
+		font-weight: bolder;
+		font-size: 50px;
+	}
+	.follow p a{
+		color: white;
+	}
+	.follow p a:hover{
+		text-decoration: none;
+		color: white;
+	}
+
+</style>
+<div class="container">
+	<main>
+		<div>
+			
+			
+			<!-- {{fs}} -->
+		</div>
+		<div class="head">
+			<div >
+
+				<img class="profile " src="https://images.unsplash.com/photo-1581397867212-e05b3692d16b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" >
+				<span id="username">{{username}}</span>
+			</div>
+			<div >
+					
+				
+		
+				
+				<div class="following">
+					{% if user.username == username %}
+
+							
+							
+
+						<div class="follow">
+							<p ><a href="{% url 'followers' user_id %}">{{followers}} Followers</a></p>
+                    		<p ><a  href="{% url 'following' user.id %}">{{following}} Following</a></p>
+							
+						</div>
+					{% else %}
+					
+						<div class="follow">
+							<p ><a href="{% url 'followers' user_id %}">{{followers}} Followers</a></p>
+                    		<p ><a  href="{% url 'following' user.id %}">{{following}} Following</a></p>
+								{% if state %}
+						<p><a href="{%url 'unfollow' user_id%}">-UNFOLLOW {{follower.name}}</a></p>
+						{% else %}
+						<p ><a href="{%url 'follow' user_id%}">+FOLLOW</a></p>
+						{% endif %}
+						</div>
+					
+						
+					
+					{% endif %}
+
+					
+				
+				
+					<!-- <p>Anonyumous preson from spot on this Earth</p> -->
+
+				</div>
+				
+				{% for post in posts %}
+				    <div class="new_post">
+				    	<div class="post">
+				    		{{post.post}}
+				    		{{post.created_date}}
+				    	</div>
+				    </div>
+				{% endfor %}
+
+				    {% if posts.has_other_pages %}
+				    <nav aria-label="...">
+				    <ul class="pagination justify-content-center">
+				        {% if posts.has_previous %}
+				          <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+				        {% else %}
+				          <li class="disabled page-item"><span>&laquo;</span></li>
+				        {% endif %}
+				        {% for i in posts.paginator.page_range %}
+				          {% if posts.number == i %}
+				            <li class="active page-link"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+				          {% else %}
+				            <li  class="page-item"><a  class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+				          {% endif %}
+				        {% endfor %}
+				        {% if posts.has_next %}
+				          <li  class="page-item"><a  class="page-link" href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+				        {% else %}
+				          <li class="disabled page-link"><span>&raquo;</span></li>
+				        {% endif %}
+				      </ul>
+				  </nav>
+				    {% endif %}
+			</div>
+		</div>
+		
+		
+	</main>
+</div>
+
+
+
+{% endblock %}
+

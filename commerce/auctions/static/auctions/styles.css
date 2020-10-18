@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+body {
+    padding: 10px;
+    font-family: 'Roboto Mono', monospace;
+}
+.jumbotron{
+	background-color: darkorange;
+}
+.auction_intro{
+	display: flex;
+justify-content: space-between;
+	/*background-color: lime;*/
+	/*border: 1px solid black*/
+	font-family: 'Roboto Mono', monospace;
+
+}
+a{
+	color: black;
+}
+.auction_intro div p{
+	/*margin: auto;*/
+	margin-top:13px;
+	/*border: 1px solid black*/
+}
+.auction_intro h1{
+	margin-bottom: 0px;
+	/*border: 1px solid black*/
+}
+.buttons{
+	text-align: right;
+
+}
+.buttons a{
+	border: 1px solid black;
+
+}
+
+.main{
+	/*background-color: lime*/
+	border: 3px solid black
+}
+
+h2{
+
+	background-color: darkorange;
+	border: 3px solid black;
+	text-align: center;
+	border-radius: 5px;
+}
+.btn-primary{
+	background-color: darkorange;
+	color: black;
+}
+.btn-primary:hover{
+	background-color: orange;
+
+}
+
+.nav li{
+	background-color: darkorange;
+	margin: 20px;
+	text-align: center;
+	border-radius: 3px;
+}
+#item{
+	display: flex;
+	border: 1px solid lightgray;
+	margin: 10px;
+
+}
+#item img{
+	padding:0 20px;
+	width: 30%;
+}
+
+img{
+	width: 100%;
+}
+.nav-link{
+	color:black;
+}
+a:hover{
+	text-decoration: none;
+	color: black;
+}
+
+
+.four{
+	margin: 0 auto;
+	/*background-color: darkorange;*/
+	text-align: center;
+}
+.four h1{
+	font-size: 60px;
+	background-color: darkorange;
+	
+}
+
+.listing{
+	display: flex;
+
+
+}
+.listing div{
+	margin: 10px auto;
+	/*border: 1px solid black;*/
+	/*background-color: orange;*/
+
+}
+
+
+p{
+	font-weight: bolder;
+	text-transform: capitalize;
+	font-size: 20px;
+}
+.details{
+	padding: 20px;
+}
+
+/*div.comment-field{
+margin: 10px 100px;
+} 
+.comment-field input{
+	width: 80%;
+	
+
+}*/
+.comment-field {
+	/*background-color: darkorange;*/
+	width: 80%;
+	margin: 20px auto;
+	text-align: center;
+}
+
+.listing_img{
+	height: 300px;
+	width: 300px;
+}
+
+.comment{
+	background-color: darkorange;
+	width:50%;
+	margin: 20px auto;
+	text-align: center;
+	border: 3px solid black
+}
+.all_cate{
+	display: flex;
+	margin-top: 20px; 
+}
+.cate{
+	background-color: darkorange;
+	border:2px solid black;
+	margin-bottom: 10px; 
+	margin-right: 10px;
+	text-align: center;
+	font-size:30px;
+	width: 300px;
+	height:150px;
+	align-self: center;
+	padding-top:35px;
+	border-radius: 5px;
+}
+.cate:hover{
+	background-color: orange;
+	border: none;
+	/*transition: all .3s ease-in .3s;*/
+}
+
+

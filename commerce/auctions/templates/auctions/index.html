@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+<div class="jumbotron">
+  <h1 class="display-4">Yo, Welcome to our Sekai</h1>
+  <p class="lead">This is a Auction Web Application You can create listing and bid on the other listing and many stuff sign in, to expolare it .</p>
+  
+</div>
+<h2>Active Listings</h2>
+<div class="container">
+    <div class="row">
+      {% if items %}
+          {% for item in items %}
+      <div class="col">
+      	
+          <div class="card" style="width: 18rem;">
+          	<img src="{{item.image}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.item}}</h5>
+             
+              <p class="card-text">{% if item.description %}{{item.description}}{% endif %}</p>
+              <p class="card-text">{{item.created_date}}</p>
+              <p class="card-text">Price {{item.price}}</p>
+             
+              <a href="{% url 'listing' item.id %}" class="card-link">More Details</a>
+              
+            </div>
+             
+              
+
+        </div>
+      </div>
+          
+          
+               {% endfor %}
+              {% else %}
+              <p>There is no Auctions Right now</p>
+              {% endif %}
+
+    </div>
+</div>
+
+
+{% endblock %}
